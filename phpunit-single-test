@@ -1,0 +1,15 @@
+#!/bin/bash
+usage="$(basename "$0") [-h] <METHOD_NAME> <CLASS_NAME> <FILE_PATH> -- Run single PHPUnit test.
+
+where:
+    -h  show this help text"
+
+if [ "$1" = "-h" ]
+then
+  echo $usage
+  exit
+fi
+
+type phpunit >/dev/null 2>&1 || { echo >&2 "phpunit is required, but it is not installed. Aborting."; exit 1; }
+
+phpunit --filter $1 $2 $3
